@@ -2176,65 +2176,15 @@ class _DynamicMathsExpression_Operator_common(bpy.types.Operator):
             #print("DELTAY="+str(deltay))
 
         elif event.type == 'LEFTMOUSE':
-            self.show_acknowledgeme_textbox(context)
             return {'FINISHED'}
 
         elif event.type in {'RIGHTMOUSE', 'ESC'}:
             #context.object.location.x = self.first_value
             #Set to default
-            self.show_acknowledgeme_textbox(context)
             return {'CANCELLED'}
 
         return {'RUNNING_MODAL'}
  
-######################################
-    def show_acknowledgeme_textbox(self, context):
-        
-        acknowledgedFile = os.path.join(os.path.dirname(os.path.abspath(__file__)),"acknowledged.flag")
-        
-        if not "Acknowledge Node Expressions Author" in bpy.data.texts.keys():
-            if not os.path.isfile(acknowledgedFile):
-                #We haven't shown the acknowledgement message and the 'acknowledged' flag file isn't present
-                textblock = bpy.data.texts.new("Acknowledge Node Expressions Author")
-                
-                textblock.from_string("\
-Dear user,\n\
-This add-on is provided free for all to use - and I hope\n\
-it is useful for whatever purpose you put it to.\n\n\
-It has taken considerable effort to get it to the point\n\
-where I'm happy to release it into the community and I\n\
-don't ask for anything in return. However, if you can,\n\
-please take the time to drop me a line - send me an email\n\
-to 'wizard@sedman.me.uk' to let me know a little about\n\
-yourself; who you are (no personal specifics) and what you\n\
-do (again, nothing specific or personally identifiable),\n\
-what you think of this software and what you'd like to see\n\
-in the future - this will make me feel appreciated and give\n\
-you a warm glow inside.\n\
-Once you have sent me an email, simply enter my email in the\n\
-expression window and this popup will not bother you again.\n\
-Thanks for reading and have a great day.\n\n\
-P.S. Want to contribute a little bit more...?\n\
-Paypal donations to 'wizard@sedman.me.uk' are always very much appreciated!\n\
-:-)\n\n\
-Best wishes,\n\
-Rich")
-
-                bpy.ops.screen.area_split(direction='VERTICAL', factor=0.5)
-        
-                otherarea = context.area                  #Instead of using the new one, use original (the right-hand split)
-                newarea = context.screen.areas[-1]      #Assumed it's the last one in the stack (which it should be)
-        
-                newarea.type = 'TEXT_EDITOR'
-                
-                editor = newarea.spaces[0]
-                editor.text = textblock
-        
-                editor.top = 1
-                bpy.ops.text.jump({"area":newarea}, line=1)
-                bpy.ops.text.move({"area":newarea}, type="LINE_BEGIN")
-                
-######################################
  
     def check(self, context):
         return True     # For now, always redraw    #TODO: Detect when we need to redraw

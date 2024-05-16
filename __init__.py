@@ -88,13 +88,13 @@
 
 bl_info = {  
  "name": "Dynamic Maths Expression",
- "author": "Rich Sedman",  
+ "author": "Erik Härkönen",  
  "version": (2, 2),  
  "blender": (3, 1, 0),  
  "location": "Node Editor > Add",  
  "description": "Provide an option to create a new group from a typed maths expression.",  
  "warning": "",  
- "wiki_url": "https://blendermarket.com/products/node-expressions",  
+ "wiki_url": "https://github.com/harskish/blender_node_expr",  
  "tracker_url": "",  
  "category": "Node"} 
 
