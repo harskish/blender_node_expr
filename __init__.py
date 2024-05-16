@@ -89,7 +89,7 @@
 bl_info = {  
  "name": "Dynamic Maths Expression",
  "author": "Erik Härkönen",  
- "version": (2, 2),  
+ "version": (2, 3),  
  "blender": (3, 1, 0),  
  "location": "Node Editor > Add",  
  "description": "Provide an option to create a new group from a typed maths expression.",  
@@ -103,6 +103,10 @@ import bpy
 from .dynamic_maths_expression_node import DynamicMathsExpression_Operator, DynamicMathsExpressionEdit_Operator, DynamicMathsExpressionEditWithin_Operator, DynamicMathsExpressionRevert_Operator, DynamicMathsExpressionUpdate_Operator, DynamicMathsExpressionToTextBlock_Operator, DynamicMathsExpressionShowDocumentation_Operator, DynamicMathsExpressionNode
 
 from nodeitems_utils import NodeItem, register_node_categories, unregister_node_categories
+
+def check_blender_version():
+    if bpy.app.version >= (4, 0):
+        raise ImportError('Blender 4.0 and newer not yet supported.')
 
 def menu_draw(self, context):
     #Force 'invoke' when calling operator
@@ -119,6 +123,7 @@ bpy.types.NODE_MT_add.append(menu_draw)
 classes = ( DynamicMathsExpression_Operator, DynamicMathsExpressionEdit_Operator, DynamicMathsExpressionEditWithin_Operator, DynamicMathsExpressionRevert_Operator ,DynamicMathsExpressionUpdate_Operator, DynamicMathsExpressionToTextBlock_Operator, DynamicMathsExpressionShowDocumentation_Operator, DynamicMathsExpressionNode)
 
 def register():
+    check_blender_version()
     from bpy.utils import register_class
     for cls in classes:
         register_class(cls)

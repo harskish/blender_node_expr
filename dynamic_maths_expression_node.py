@@ -173,7 +173,7 @@ def getNodeIdForCurrentTree(sourceNodeID):
     elif bpy.context.space_data.tree_type == "GeometryNodeTree":
         nodeEditorType = "Geometry"
     else:
-        raise Exception("Unknown tree type '"+space.tree_type+"'")
+        raise Exception("Unknown tree type '"+bpy.context.space_data.tree_type+"'")
 
     # If it already includes the correct prefix for this editor space, assume it's fine.
     if sourceNodeID.startswith(nodeEditorType):
